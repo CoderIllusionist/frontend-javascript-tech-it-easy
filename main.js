@@ -193,3 +193,12 @@ const hasAmbilight = inventory.filter((tv) => {
 const sortLowToHigh = inventory.sort((tvOne, tvTwo) => {
     return tvOne.price - tvTwo.price;
 });
+
+function calulateTurnOver() {
+    let turnOver = 0;
+    for (let i = 0; i < inventory.length; i++) {
+        const object = inventory[i];
+        turnOver = turnOver + (object.originalStock * object.price);
+    }
+    return turnOver;
+}
