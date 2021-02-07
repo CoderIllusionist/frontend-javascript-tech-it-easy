@@ -182,11 +182,10 @@ const TVNames = inventory.map((tv) => {
     return tv.name;
 });
 
-console.log(TVNames)
+const soldOutTVs = inventory.filter((tv) => {
+    return tv.originalStock === tv.sold
+});
 
-function calculateSoldOut(tv) {
-      return tv.originalStock === tv.sold;
-}
-const soldOutTVs = inventory.filter(calculateSoldOut);
-
-console.log(soldOutTVs)
+const hasAmbilight = inventory.filter((tv) => {
+    return tv.options.ambiLight === true
+});
