@@ -187,21 +187,22 @@ function createButton(text, textColor, functionName) {
                 const soldOutTVs = inventory.filter((tv) => {
                     return tv.originalStock === tv.sold
                 });
-                console.log(soldOutTVs)
-                showInventory(soldOutTVs)
+                console.log(soldOutTVs);
+                showInventory(soldOutTVs);
                 break;
             case 'sort':
                 const sortLowToHigh = inventory.sort((tvOne, tvTwo) => {
                     return tvOne.price - tvTwo.price;
                 });
-                showInventory(inventory)
+                console.log(inventory);
+                showInventory(inventory);
                 break;
             case 'ambilight':
                 const hasAmbilight = inventory.filter((tv) => {
                     return tv.options.ambiLight === true
                 });
-                console.log(hasAmbilight)
-                showInventory(hasAmbilight)
+                console.log(hasAmbilight);
+                showInventory(hasAmbilight);
                 break;
         }
 
@@ -217,7 +218,7 @@ function calculateToSell(inventory) {
         let toSellForEachProduct = (item.originalStock - item.sold);
         toSellTotal = toSellTotal + toSellForEachProduct;
     }
-    return toSellTotal
+    return toSellTotal;
 }
 
 function calculateMaximumTurnOver(inventory) {
@@ -261,9 +262,9 @@ function generateScreenSizesString(tv) {
 
 function showInventory(inventory) {
     for (let i = 0; i < inventory.length; i++) {
-        let tv = inventory[i]
+        let tv = inventory[i];
         const showTV = generateTVString(tv) + "\n" + formatPrice(tv) + "\n" + generateScreenSizesString(tv);
-        createElement("p", showTV, "", "", "tvs")
+        createElement("p", showTV, "", "", "tvs");
     }
 }
 
@@ -274,10 +275,10 @@ const TVNames = inventory.map((tv) => {
 });
 
 
-const maximumTurnOver = createElement("p", `Our maximum turnover: €${calculateMaximumTurnOver(inventory)}, if everything has been sold`, "blue", "", "max-turnover")
+const maximumTurnOver = createElement("p", `Our maximum turnover: €${calculateMaximumTurnOver(inventory)}, if everything has been sold`, "blue", "", "max-turnover");
 
 
-const turnOver = createElement("p", `Our current turnover: €${calculateTurnOver(inventory)}`, "green", "", "current-turnover")
+const turnOver = createElement("p", `Our current turnover: €${calculateTurnOver(inventory)}`, "green", "", "current-turnover");
 
 
 // Only show two tv's
@@ -287,8 +288,8 @@ const turnOver = createElement("p", `Our current turnover: €${calculateTurnOve
 // createElement("p", tvTwo, "")
 
 const sortPrice = createButton("Sort on price", "green", "sort");
-const soldOut = createButton("Sold out devices", "red", "sold")
-const ambilightTVs = createButton("Ambilight tv's", "orange", "ambilight")
+const soldOut = createButton("Sold out devices", "red", "sold");
+const ambilightTVs = createButton("Ambilight tv's", "orange", "ambilight");
 
 showInventory(inventory) // shows entire inventory
 
