@@ -162,12 +162,67 @@ const inventory = [
     },
 ];
 
-function createElement(p, text, textColor) {
+function createElement(p, text, textColor, onclick, className) {
     let element = document.createElement(p);
     element.style.color = textColor;
+    element.className = className;
     element.innerText = text;
+    element.onclick = onclick;
     document.body.appendChild(element);
 }
+
+function createButtonSortPrice(text, textColor){
+    var button = document.createElement('button');
+    button.style.color = textColor;
+    button.innerHTML = text;
+    button.onclick = function(){
+        const sortLowToHigh = inventory.sort((tvOne, tvTwo) => {
+            return tvOne.price - tvTwo.price;
+        });
+        var elements = document.getElementsByClassName("tvs");
+        while(elements.length > 0){
+            elements[0].parentNode.removeChild(elements[0]);
+        }
+        showInventory(inventory)
+    };
+    document.body.appendChild(button);
+};
+
+function createButtonByAmbilight(text, textColor){
+    var button = document.createElement('button');
+    button.style.color = textColor;
+    button.innerHTML = text;
+    button.onclick = function(){
+        const hasAmbilight = inventory.filter((tv) => {
+            return tv.options.ambiLight === true
+        });
+        var elements = document.getElementsByClassName("tvs");
+        while(elements.length > 0){
+            elements[0].parentNode.removeChild(elements[0]);
+        }
+        console.log(hasAmbilight)
+        showInventory(hasAmbilight)
+    };
+    document.body.appendChild(button);
+};
+function createButtonSoldOut(text, textColor){
+    var button = document.createElement('button');
+    button.style.color = textColor;
+    button.innerHTML = text;
+    button.onclick = function(){
+        const soldOutTVs = inventory.filter((tv) => {
+            return tv.originalStock === tv.sold
+        });
+
+        var elements = document.getElementsByClassName("tvs");
+        while(elements.length > 0){
+            elements[0].parentNode.removeChild(elements[0]);
+        }
+        console.log(soldOutTVs)
+        showInventory(soldOutTVs)
+    };
+    document.body.appendChild(button);
+};
 
 function calculateToSell(inventory) {
     let toSellTotal = 0
@@ -222,33 +277,23 @@ function showInventory(inventory) {
     for (let i = 0; i < inventory.length; i++) {
         let tv = inventory[i]
         const showTV = generateTVString(tv) + "\n" + formatPrice(tv) + "\n" + generateScreenSizesString(tv);
-        createElement("p", showTV, "")
+        createElement("p", showTV, "", "", "tvs")
     }
 }
 
-const toSell = createElement("p", `The total to sell: ${calculateToSell(inventory)}`, "red");
+const toSell = createElement("p", `The total to sell: ${calculateToSell(inventory)}`, "red", "", "to-sell");
 
 const TVNames = inventory.map((tv) => {
     return tv.name;
 });
 
-const soldOutTVs = inventory.filter((tv) => {
-    return tv.originalStock === tv.sold
-});
-
-const hasAmbilight = inventory.filter((tv) => {
-    return tv.options.ambiLight === true
-});
-
-const sortLowToHigh = inventory.sort((tvOne, tvTwo) => {
-    return tvOne.price - tvTwo.price;
-});
 
 
-const maximumTurnOver = createElement("p", `Our maximum turnover: €${calculateMaximumTurnOver(inventory)}, if everything has been sold`, "blue")
+
+const maximumTurnOver = createElement("p", `Our maximum turnover: €${calculateMaximumTurnOver(inventory)}, if everything has been sold`, "blue", "", "max-turnover")
 
 
-const turnOver = createElement("p", `Our current turnover: €${calculateTurnOver(inventory)}`, "green")
+const turnOver = createElement("p", `Our current turnover: €${calculateTurnOver(inventory)}`, "green", "", "current-turnover")
 
 
 // Only show two tv's
@@ -257,9 +302,9 @@ const turnOver = createElement("p", `Our current turnover: €${calculateTurnOve
 // createElement("p", tvOne, "")
 // createElement("p", tvTwo, "")
 
+const sortPrice = createButtonSortPrice("Sort on price", "green");
+const ambilightTVs = createButtonByAmbilight("Ambilight tv's", "orange")
+const soldOut = createButtonSoldOut("Sold out devices", "red")
 
 showInventory(inventory) // shows entire inventory
-
-
-
 
