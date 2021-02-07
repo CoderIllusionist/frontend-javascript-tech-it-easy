@@ -205,4 +205,15 @@ function calculateMaximumTurnOver(inventory) {
     }
     return turnOver;
 }
-const turnOver = createElement("p", `Our maximum turnover: ${calculateMaximumTurnOver(inventory)}`, "blue")
+const maximumTurnOver = createElement("p", `Our maximum turnover: €${calculateMaximumTurnOver(inventory)}, if everything has been sold`, "blue")
+
+function calculateTurnOver(inventory) {
+    let turnOver = 0
+    for (let i = 0; i < inventory.length; i++) {
+        const object = inventory[i];
+        turnOver = turnOver + (object.sold * object.price);
+    }
+    return turnOver;
+}
+
+const turnOver = createElement("p", `Our current turnover: €${calculateTurnOver(inventory)}`, "green")
