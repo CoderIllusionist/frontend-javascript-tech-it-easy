@@ -162,7 +162,7 @@ const inventory = [
     },
 ];
 
-function toSell(inventory) {
+function calculateToSell(inventory) {
     let toSellTotal = 0
     for (let i = 0; i < inventory.length; i++) {
         const item = inventory[i];
@@ -172,4 +172,8 @@ function toSell(inventory) {
     return toSellTotal
 }
 
-toSell(inventory)
+const toSell = calculateToSell(inventory);
+
+let showToSell = document.getElementById('total-to-sell');
+showToSell.style.color = 'red';
+showToSell.textContent = `The total to sell: ${toSell}`;
