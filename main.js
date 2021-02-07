@@ -241,6 +241,12 @@ function generateScreenSizesString(tv) {
     return object.slice(0, -3); // remove the ' | '
 }
 
+// Only show two tv's
+const tvOne = generateTVString(inventory[0]) + "\n" + formatPrice(inventory[0]) + "\n" + generateScreenSizesString(inventory[0]);
+const tvTwo = generateTVString(inventory[1]) + "\n" + formatPrice(inventory[1]) + "\n" + generateScreenSizesString(inventory[1]);
+createElement("p", showTV, "")
+createElement("p", showTV, "")
+
 function showInventory(inventory) {
     for (let i = 0; i < inventory.length; i++) {
         let tv = inventory[i]
