@@ -162,6 +162,13 @@ const inventory = [
     },
 ];
 
+function createElement(p, text, textColor) {
+    let element = document.createElement(p);
+    element.style.color = textColor;
+    element.innerText = text;
+    document.body.appendChild(element);
+}
+
 function calculateToSell(inventory) {
     let toSellTotal = 0
     for (let i = 0; i < inventory.length; i++) {
@@ -172,11 +179,7 @@ function calculateToSell(inventory) {
     return toSellTotal
 }
 
-const toSell = calculateToSell(inventory);
-
-let showToSell = document.getElementById('total-to-sell');
-showToSell.style.color = 'red';
-showToSell.textContent = `The total to sell: ${toSell}`;
+const toSell = createElement("p",`The total to sell: ${calculateToSell(inventory)}`, "red" );
 
 const TVNames = inventory.map((tv) => {
     return tv.name;
@@ -202,3 +205,4 @@ function calulateTurnOver(inventory) {
     }
     return turnOver;
 }
+const turnOver = createElement("p", `Our maximum turnover: ${calulateTurnOver(inventory)}`, "blue")
