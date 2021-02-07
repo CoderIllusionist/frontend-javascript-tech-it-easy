@@ -177,3 +177,9 @@ const toSell = calculateToSell(inventory);
 let showToSell = document.getElementById('total-to-sell');
 showToSell.style.color = 'red';
 showToSell.textContent = `The total to sell: ${toSell}`;
+
+const TVNames = inventory.map((tv) => {
+    return tv.name;
+});
+
+console.log(TVNames)
