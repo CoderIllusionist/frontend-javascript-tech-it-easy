@@ -218,6 +218,10 @@ function calculateTurnOver(inventory) {
 
 const turnOver = createElement("p", `Our current turnover: €${calculateTurnOver(inventory)}`, "green")
 
+function inchesToCM(inches) {
+    return Math.round(inches / 0.39370);
+}
+
 const twoTvs = inventory.filter((tv) => {
     return inventory.length = 2;
 });
@@ -227,7 +231,3 @@ const twoTvsByTypeAndName = twoTvs.map((tv) => {
 });
 
 createElement("p", `${twoTvsByTypeAndName}`, "orange")
-
-
-
-
