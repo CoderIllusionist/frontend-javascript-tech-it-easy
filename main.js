@@ -197,7 +197,7 @@ const sortLowToHigh = inventory.sort((tvOne, tvTwo) => {
     return tvOne.price - tvTwo.price;
 });
 
-function calulateMaximumTurnOver(inventory) {
+function calculateMaximumTurnOver(inventory) {
     let turnOver = 0;
     for (let i = 0; i < inventory.length; i++) {
         const object = inventory[i];
@@ -205,4 +205,4 @@ function calulateMaximumTurnOver(inventory) {
     }
     return turnOver;
 }
-const turnOver = createElement("p", `Our maximum turnover: ${calulateMaximumTurnOver(inventory)}`, "blue")
+const turnOver = createElement("p", `Our maximum turnover: ${calculateMaximumTurnOver(inventory)}`, "blue")
