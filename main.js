@@ -179,7 +179,7 @@ function calculateToSell(inventory) {
     return toSellTotal
 }
 
-const toSell = createElement("p",`The total to sell: ${calculateToSell(inventory)}`, "red" );
+const toSell = createElement("p", `The total to sell: ${calculateToSell(inventory)}`, "red");
 
 const TVNames = inventory.map((tv) => {
     return tv.name;
@@ -205,6 +205,7 @@ function calculateMaximumTurnOver(inventory) {
     }
     return turnOver;
 }
+
 const maximumTurnOver = createElement("p", `Our maximum turnover: €${calculateMaximumTurnOver(inventory)}, if everything has been sold`, "blue")
 
 function calculateTurnOver(inventory) {
@@ -218,16 +219,39 @@ function calculateTurnOver(inventory) {
 
 const turnOver = createElement("p", `Our current turnover: €${calculateTurnOver(inventory)}`, "green")
 
+
 function inchesToCM(inches) {
     return Math.round(inches / 0.39370);
 }
 
-const twoTvs = inventory.filter((tv) => {
-    return inventory.length = 2;
-});
+function generateTVString(tv) {
+    return tv.brand + " " + tv.type + " - " + tv.name;
+}
 
-const twoTvsByTypeAndName = twoTvs.map((tv) => {
-    return tv.type + " " + tv.name;
-});
+function formatPrice(tv) {
+    return "€" + tv.price + ",-";
+}
 
-createElement("p", `${twoTvsByTypeAndName}`, "orange")
+function generateScreenSizesString(tv) {
+    let object = "";
+
+    for (let i = 0; i < tv.availableSizes.length; i++) {
+        object = object + tv.availableSizes[i] + " inch " + "(" + inchesToCM(tv.availableSizes[i]) + ")" + " | ";
+    }
+    return object.slice(0, -3); // remove the ' | '
+}
+
+
+function showEntireInventory(inventory) {
+    for (let i = 0; i < inventory.length; i++) {
+        let tv = inventory[i]
+        const showTV = generateTVString(tv) + "\n" + formatPrice(tv) + "\n" + generateScreenSizesString(tv);
+        createElement("p", showTV, "")
+    }
+}
+
+showEntireInventory(inventory)
+
+
+
+
