@@ -194,7 +194,7 @@ const sortLowToHigh = inventory.sort((tvOne, tvTwo) => {
     return tvOne.price - tvTwo.price;
 });
 
-function calulateTurnOver() {
+function calulateTurnOver(inventory) {
     let turnOver = 0;
     for (let i = 0; i < inventory.length; i++) {
         const object = inventory[i];
