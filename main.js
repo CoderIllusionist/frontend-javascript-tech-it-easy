@@ -171,58 +171,44 @@ function createElement(p, text, textColor, onclick, className) {
     document.body.appendChild(element);
 }
 
-function createButtonSortPrice(text, textColor){
+// function to sort by price, filter by sold out tv's and filter by ambilight tv's
+function createButton(text, textColor, functionName) {
     var button = document.createElement('button');
     button.style.color = textColor;
     button.innerHTML = text;
-    button.onclick = function(){
-        const sortLowToHigh = inventory.sort((tvOne, tvTwo) => {
-            return tvOne.price - tvTwo.price;
-        });
+
+    button.onclick = function () {
         var elements = document.getElementsByClassName("tvs");
-        while(elements.length > 0){
+        while (elements.length > 0) {
             elements[0].parentNode.removeChild(elements[0]);
         }
-        showInventory(inventory)
+        switch (functionName) {
+            case 'sold':
+                const soldOutTVs = inventory.filter((tv) => {
+                    return tv.originalStock === tv.sold
+                });
+                console.log(soldOutTVs)
+                showInventory(soldOutTVs)
+                break;
+            case 'sort':
+                const sortLowToHigh = inventory.sort((tvOne, tvTwo) => {
+                    return tvOne.price - tvTwo.price;
+                });
+                showInventory(inventory)
+                break;
+            case 'ambilight':
+                const hasAmbilight = inventory.filter((tv) => {
+                    return tv.options.ambiLight === true
+                });
+                console.log(hasAmbilight)
+                showInventory(hasAmbilight)
+                break;
+        }
+
     };
     document.body.appendChild(button);
 };
 
-function createButtonByAmbilight(text, textColor){
-    var button = document.createElement('button');
-    button.style.color = textColor;
-    button.innerHTML = text;
-    button.onclick = function(){
-        const hasAmbilight = inventory.filter((tv) => {
-            return tv.options.ambiLight === true
-        });
-        var elements = document.getElementsByClassName("tvs");
-        while(elements.length > 0){
-            elements[0].parentNode.removeChild(elements[0]);
-        }
-        console.log(hasAmbilight)
-        showInventory(hasAmbilight)
-    };
-    document.body.appendChild(button);
-};
-function createButtonSoldOut(text, textColor){
-    var button = document.createElement('button');
-    button.style.color = textColor;
-    button.innerHTML = text;
-    button.onclick = function(){
-        const soldOutTVs = inventory.filter((tv) => {
-            return tv.originalStock === tv.sold
-        });
-
-        var elements = document.getElementsByClassName("tvs");
-        while(elements.length > 0){
-            elements[0].parentNode.removeChild(elements[0]);
-        }
-        console.log(soldOutTVs)
-        showInventory(soldOutTVs)
-    };
-    document.body.appendChild(button);
-};
 
 function calculateToSell(inventory) {
     let toSellTotal = 0
@@ -288,8 +274,6 @@ const TVNames = inventory.map((tv) => {
 });
 
 
-
-
 const maximumTurnOver = createElement("p", `Our maximum turnover: €${calculateMaximumTurnOver(inventory)}, if everything has been sold`, "blue", "", "max-turnover")
 
 
@@ -302,9 +286,9 @@ const turnOver = createElement("p", `Our current turnover: €${calculateTurnOve
 // createElement("p", tvOne, "")
 // createElement("p", tvTwo, "")
 
-const sortPrice = createButtonSortPrice("Sort on price", "green");
-const ambilightTVs = createButtonByAmbilight("Ambilight tv's", "orange")
-const soldOut = createButtonSoldOut("Sold out devices", "red")
+const sortPrice = createButton("Sort on price", "green", "sort");
+const soldOut = createButton("Sold out devices", "red", "sold")
+const ambilightTVs = createButton("Ambilight tv's", "orange", "ambilight")
 
 showInventory(inventory) // shows entire inventory
 
