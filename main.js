@@ -217,3 +217,17 @@ function calculateTurnOver(inventory) {
 }
 
 const turnOver = createElement("p", `Our current turnover: €${calculateTurnOver(inventory)}`, "green")
+
+const twoTvs = inventory.filter((tv) => {
+    return inventory.length = 2;
+});
+
+const twoTvsByTypeAndName = twoTvs.map((tv) => {
+    return tv.type + " " + tv.name;
+});
+
+createElement("p", `${twoTvsByTypeAndName}`, "orange")
+
+
+
+
