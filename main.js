@@ -244,8 +244,8 @@ function generateScreenSizesString(tv) {
 // Only show two tv's
 const tvOne = generateTVString(inventory[0]) + "\n" + formatPrice(inventory[0]) + "\n" + generateScreenSizesString(inventory[0]);
 const tvTwo = generateTVString(inventory[1]) + "\n" + formatPrice(inventory[1]) + "\n" + generateScreenSizesString(inventory[1]);
-createElement("p", showTV, "")
-createElement("p", showTV, "")
+createElement("p", tvOne, "")
+createElement("p", tvTwo, "")
 
 function showInventory(inventory) {
     for (let i = 0; i < inventory.length; i++) {
