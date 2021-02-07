@@ -183,3 +183,10 @@ const TVNames = inventory.map((tv) => {
 });
 
 console.log(TVNames)
+
+function calculateSoldOut(tv) {
+      return tv.originalStock === tv.sold;
+}
+const soldOutTVs = inventory.filter(calculateSoldOut);
+
+console.log(soldOutTVs)
