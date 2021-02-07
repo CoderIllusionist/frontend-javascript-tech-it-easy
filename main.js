@@ -241,8 +241,7 @@ function generateScreenSizesString(tv) {
     return object.slice(0, -3); // remove the ' | '
 }
 
-
-function showEntireInventory(inventory) {
+function showInventory(inventory) {
     for (let i = 0; i < inventory.length; i++) {
         let tv = inventory[i]
         const showTV = generateTVString(tv) + "\n" + formatPrice(tv) + "\n" + generateScreenSizesString(tv);
@@ -250,7 +249,7 @@ function showEntireInventory(inventory) {
     }
 }
 
-showEntireInventory(inventory)
+showInventory(inventory) // shows entire inventory
 
 
 
