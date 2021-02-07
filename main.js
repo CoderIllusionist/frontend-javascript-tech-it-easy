@@ -189,3 +189,7 @@ const soldOutTVs = inventory.filter((tv) => {
 const hasAmbilight = inventory.filter((tv) => {
     return tv.options.ambiLight === true
 });
+
+const sortLowToHigh = inventory.sort((tvOne, tvTwo) => {
+    return tvOne.price - tvTwo.price;
+});
