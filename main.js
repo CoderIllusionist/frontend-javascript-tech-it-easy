@@ -162,6 +162,38 @@ const inventory = [
     },
 ];
 
+function removeTVs() {
+    let elements = document.getElementsByClassName("tvs");
+    while (elements.length > 0) {
+        elements[0].parentNode.removeChild(elements[0]);
+    }
+}
+
+function sortByPrice() {
+    const sortLowToHigh = inventory.sort((tvOne, tvTwo) => {
+        return tvOne.price - tvTwo.price;
+    });
+    return sortLowToHigh
+}
+
+function showSoldOutDevices() {
+    const soldOutTVs = inventory.filter((tv) => {
+        return tv.originalStock === tv.sold;
+    });
+    return soldOutTVs;
+}
+function showAmbilightTVs() {
+    const hasAmbilight = inventory.filter((tv) => {
+        return tv.options.ambiLight === true;
+    });
+    return hasAmbilight;
+}
+const toSell = createElement("p", `The total to sell: ${calculateToSell(inventory)}`, "red", "", "to-sell");
+
+const TVNames = inventory.map((tv) => {
+    return tv.name;
+});
+
 function createElement(p, text, textColor, className) {
     let element = document.createElement(p);
     element.style.color = textColor;
@@ -225,7 +257,7 @@ function generateScreenSizesString(tv) {
     for (let i = 0; i < tv.availableSizes.length; i++) {
         object = object + tv.availableSizes[i] + " inch " + "(" + inchesToCM(tv.availableSizes[i]) + ")" + " | ";
     }
-    return object.slice(0, -3); // remove the ' | '
+    return object.slice(0, -3); // remove the ' | ' its a hack :)
 }
 
 function showInventory(inventory) {
@@ -236,42 +268,7 @@ function showInventory(inventory) {
     }
 }
 
-function removeTVs() {
-    let elements = document.getElementsByClassName("tvs");
-    while (elements.length > 0) {
-        elements[0].parentNode.removeChild(elements[0]);
-    }
-}
-
-function sortByPrice() {
-    const sortLowToHigh = inventory.sort((tvOne, tvTwo) => {
-        return tvOne.price - tvTwo.price;
-    });
-    return sortLowToHigh
-}
-
-function showSoldOutDevices() {
-    const soldOutTVs = inventory.filter((tv) => {
-        return tv.originalStock === tv.sold;
-    });
-    return soldOutTVs;
-}
-function showAmbilightTVs() {
-    const hasAmbilight = inventory.filter((tv) => {
-        return tv.options.ambiLight === true;
-    });
-    return hasAmbilight;
-}
-const toSell = createElement("p", `The total to sell: ${calculateToSell(inventory)}`, "red", "", "to-sell");
-
-const TVNames = inventory.map((tv) => {
-    return tv.name;
-});
-
-
 const maximumTurnOver = createElement("p", `Our maximum turnover: €${calculateMaximumTurnOver(inventory)}, if everything has been sold`, "blue", "", "max-turnover");
-
-
 const turnOver = createElement("p", `Our current turnover: €${calculateTurnOver(inventory)}`, "green", "", "current-turnover");
 
 
