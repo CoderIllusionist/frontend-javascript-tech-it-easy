@@ -162,12 +162,11 @@ const inventory = [
     },
 ];
 
-function createElement(p, text, textColor, onclick, className) {
+function createElement(p, text, textColor, className) {
     let element = document.createElement(p);
     element.style.color = textColor;
     element.className = className;
     element.innerText = text;
-    element.onclick = onclick;
     document.body.appendChild(element);
 }
 
@@ -264,7 +263,7 @@ function showInventory(inventory) {
     for (let i = 0; i < inventory.length; i++) {
         let tv = inventory[i];
         const showTV = generateTVString(tv) + "\n" + formatPrice(tv) + "\n" + generateScreenSizesString(tv);
-        createElement("p", showTV, "", "", "tvs");
+        createElement("p", showTV, "", "tvs");
     }
 }
 
